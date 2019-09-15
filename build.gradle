@@ -1,5 +1,27 @@
 apply plugin: 'com.android.library'
-apply plugin: 'android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = "Andromeda"
+    bintrayName = "app.duna.andro"
+
+    libraryName = "andro"
+
+    publishedGroupId = "app.duna.andro"
+    artifact = "andro"
+    libraryVersion = "1.0.0"
+
+    libraryDescription = ""
+    siteUrl = "https://github.com/UINT-AFRICA/Andromeda/wiki"
+    gitUrl = "https://github.com/UINT-AFRICA/Andromeda.git"
+    developerId = "aymeekouakou"
+    developerName = "AYMARD KOUAKOU"
+    developerEmail = "contact@aymardkouakou.me"
+    licenseName = "MIT"
+    licenseUrl = "http://www.opensource.org/licenses/mit-license.php"
+    allLicenses = ["MIT"]
+}
 
 android {
     compileSdkVersion 29
@@ -48,4 +70,11 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.0.6'
 }
 
-apply from: 'publish.gradle'
+repositories {
+    mavenCentral()
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+}
